@@ -45,7 +45,7 @@ public class Axle
         }
 
         WheelFrictionCurve curve = leftWheel.sidewaysFriction;
-        curve.stiffness = torque > 0 ? 0.5f : 2f;
+        curve.stiffness = torque > 0 ? 1f : 3f;
         leftWheel.sidewaysFriction = curve;
         rightWheel.sidewaysFriction = curve;
     }

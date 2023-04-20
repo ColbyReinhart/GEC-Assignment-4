@@ -8,12 +8,6 @@ public class Axle : MonoBehaviour
     public WheelCollider leftWheel;
     public WheelCollider rightWheel;
 
-    public float baseForwardFriction;
-    public float baseSidewaysFriction;
-    public float handbrakeTorque;
-    public float baseExtremumSlip;
-    public float handbrakeExtremumSlip;
-
     private WheelCollider[] wheels;
 
     private void Awake()
@@ -21,20 +15,6 @@ public class Axle : MonoBehaviour
         wheels = new WheelCollider[2];
         wheels[0] = leftWheel;
         wheels[1] = rightWheel;
-    }
-
-    private void Start()
-    {
-        foreach (WheelCollider wheel in wheels)
-        {
-            WheelFrictionCurve forward = wheel.forwardFriction;
-            forward.stiffness = baseForwardFriction;
-            wheel.forwardFriction = forward;
-
-            WheelFrictionCurve sideways = wheel.sidewaysFriction;
-            sideways.stiffness = baseSidewaysFriction;
-            wheel.sidewaysFriction = sideways;
-        }
     }
 
     public void DeliverPower(float torque)
@@ -67,21 +47,16 @@ public class Axle : MonoBehaviour
         }
     }
 
-    public void ApplyHandbrake(float brakePower)
+    public void ApplyHandbrake(float torque)
     {
         foreach (WheelCollider wheel in wheels)
         {
             // Don't do anything unless the handbrake is doing more
             // than what's already applied
-            if (handbrakeTorque >  wheel.brakeTorque)
+            if (torque >  wheel.brakeTorque)
             {
-                wheel.brakeTorque = handbrakeTorque * brakePower;
+                wheel.brakeTorque = torque;
             }
-
-            // Set the special side friction
-            WheelFrictionCurve sideways = wheel.sidewaysFriction;
-            sideways.extremumSlip = (brakePower > 0) ? handbrakeExtremumSlip : baseExtremumSlip;
-            wheel.sidewaysFriction = sideways;
         }
     }
 }

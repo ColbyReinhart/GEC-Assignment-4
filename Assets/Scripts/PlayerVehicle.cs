@@ -8,10 +8,9 @@ public class PlayerVehicle : MonoBehaviour
     public Axle rearAxle;
     public float maxEngineTorque;
     public float brakeTorque;
+    public float handbrakeTorque;
     public float maxSteeringAngle;
     public float maxSpeed;
-    public float baseDownforce;
-    public float maxDownforceModifier;
 
     private Rigidbody rb;
 
@@ -42,9 +41,6 @@ public class PlayerVehicle : MonoBehaviour
         float engineTorque = maxEngineTorque - (maxSpeedPercent * maxEngineTorque);
         rearAxle.DeliverPower(Input.GetAxis("Gas") * engineTorque);
 
-        // Calculate and apply downforce
-        rb.AddForce(Vector3.down * (baseDownforce + (maxDownforceModifier * maxSpeedPercent)));
-
         // Do steering
         frontAxle.Steer(Input.GetAxis("Steering") * maxSteeringAngle);
 
@@ -53,7 +49,6 @@ public class PlayerVehicle : MonoBehaviour
         rearAxle.ApplyBrake(Input.GetAxis("Brake") * brakeTorque);
 
         // Do handbrake
-        frontAxle.ApplyHandbrake(Input.GetAxis("Handbrake"));
-        rearAxle.ApplyHandbrake(Input.GetAxis("Handbrake"));
+        rearAxle.ApplyHandbrake(Input.GetAxis("Handbrake") * handbrakeTorque);
     }
 }

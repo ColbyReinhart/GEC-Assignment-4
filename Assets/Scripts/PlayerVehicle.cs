@@ -2,63 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class Axle
-{
-    public WheelCollider leftWheel;
-    public WheelCollider rightWheel;
-    public bool hasMotor;
-    public bool hasSteering;
-
-    public void ApplyMotor(float torque)
-    {
-        leftWheel.motorTorque = torque;
-        rightWheel.motorTorque = torque;
-    }
-
-    public void ApplyBrake(float torque)
-    {
-        leftWheel.brakeTorque = torque;
-        rightWheel.brakeTorque = torque;
-    }
-
-    public void ApplySteering(float steerAngle)
-    {
-        Vector3 wheelEulers = leftWheel.transform.localEulerAngles;
-        wheelEulers.y = steerAngle;
-        leftWheel.transform.localEulerAngles = wheelEulers;
-        wheelEulers.y = steerAngle + 180f;
-        rightWheel.transform.localEulerAngles = wheelEulers;
-        leftWheel.steerAngle = steerAngle;
-        rightWheel.steerAngle = steerAngle;
-    }
-
-    public void ApplyHandbrake(float torque)
-    {
-        if (torque > leftWheel.brakeTorque)
-        {
-            leftWheel.brakeTorque = torque;
-        }
-        if (torque > rightWheel.brakeTorque)
-        {
-            rightWheel.brakeTorque = torque;
-        }
-
-        WheelFrictionCurve curve = leftWheel.sidewaysFriction;
-        curve.stiffness = torque > 0 ? 1f : 3f;
-        leftWheel.sidewaysFriction = curve;
-        rightWheel.sidewaysFriction = curve;
-    }
-}
-
 public class PlayerVehicle : MonoBehaviour
 {
     public Axle frontAxle;
     public Axle rearAxle;
-    public float motorTorque;
+    public float maxEngineTorque;
     public float brakeTorque;
-    public float handbrakeTorque;
     public float maxSteeringAngle;
+    public float maxSpeed;
+    public float baseDownforce;
+    public float maxDownforceModifier;
 
     private Rigidbody rb;
 
@@ -82,10 +35,25 @@ public class PlayerVehicle : MonoBehaviour
 
     public void FixedUpdate()
     {
-        rearAxle.ApplyMotor(Input.GetAxis("Gas") * motorTorque);
+        // Prelim stuff
+        float maxSpeedPercent = rb.velocity.magnitude / maxSpeed;
+
+        // Calculate engine torque and apply to appropriate axle
+        float engineTorque = maxEngineTorque - (maxSpeedPercent * maxEngineTorque);
+        rearAxle.DeliverPower(Input.GetAxis("Gas") * engineTorque);
+
+        // Calculate and apply downforce
+        rb.AddForce(Vector3.down * (baseDownforce + (maxDownforceModifier * maxSpeedPercent)));
+
+        // Do steering
+        frontAxle.Steer(Input.GetAxis("Steering") * maxSteeringAngle);
+
+        // Do brakes
         frontAxle.ApplyBrake(Input.GetAxis("Brake") * brakeTorque);
         rearAxle.ApplyBrake(Input.GetAxis("Brake") * brakeTorque);
-        frontAxle.ApplySteering(Input.GetAxis("Steering") * maxSteeringAngle);
-        rearAxle.ApplyHandbrake(Input.GetAxis("Handbrake") * handbrakeTorque);
+
+        // Do handbrake
+        frontAxle.ApplyHandbrake(Input.GetAxis("Handbrake"));
+        rearAxle.ApplyHandbrake(Input.GetAxis("Handbrake"));
     }
 }

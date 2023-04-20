@@ -11,12 +11,20 @@ public class PlayerVehicle : MonoBehaviour
     public float handbrakeTorque;
     public float maxSteeringAngle;
     public float maxSpeed;
+    public int gears = 5;
+    public float gearIdlePitch = 0.3f;
+    public float gearLowPitch = 1f;
+    public float gearHighPitch = 2f;
 
     private Rigidbody rb;
+    private AudioSource engineAudio;
+    private float speedPerGearMod;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        engineAudio = GetComponent<AudioSource>();
+        speedPerGearMod = maxSpeed / gears;
     }
 
     // Finds the corresponding visual wheel and correctly applies the transform
@@ -50,5 +58,24 @@ public class PlayerVehicle : MonoBehaviour
 
         // Do handbrake
         rearAxle.ApplyHandbrake(Input.GetAxis("Handbrake") * handbrakeTorque);
+
+        // Handle engine audio
+
+        // What gear are we in?
+        int gear = (int)(rb.velocity.magnitude / speedPerGearMod);
+
+        // If we're in 0th gear, the lowest pitch in the range should
+        // be lower to make the engine sound like it's idling
+        float lowPitch = (gear > 0) ? gearLowPitch : gearIdlePitch;
+
+        // Find how fast we are in the current gear, then find the
+        // "fast percentage" out of this gear.
+        float currentGearSpeed = rb.velocity.magnitude % speedPerGearMod;
+        float currentGearSpeedRatio = currentGearSpeed / speedPerGearMod;
+
+        // Find the engine audio pitch based on what we found above
+        float pitchRange = gearHighPitch - lowPitch;
+        float pitch = (currentGearSpeedRatio * pitchRange) + lowPitch;
+        engineAudio.pitch = pitch;
     }
 }

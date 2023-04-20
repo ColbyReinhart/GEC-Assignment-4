@@ -7,14 +7,58 @@ public class Axle : MonoBehaviour
 {
     public WheelCollider leftWheel;
     public WheelCollider rightWheel;
+    public float forwardSlipThreshold = 0.4f;
+    public float sideSlipThreshold = 0.2f;
 
     private WheelCollider[] wheels;
+    private AudioSource skidAudio;
+    private bool isDrifting = false;
 
     private void Awake()
     {
         wheels = new WheelCollider[2];
         wheels[0] = leftWheel;
         wheels[1] = rightWheel;
+
+        skidAudio = GetComponent<AudioSource>();
+    }
+
+    private void Update()
+    {
+        // We'll just check one wheel for efficiency
+        WheelHit hit = new WheelHit();
+        if (leftWheel.GetGroundHit(out hit))
+        {
+            if (hit.sidewaysSlip >= sideSlipThreshold||
+                hit.forwardSlip >= forwardSlipThreshold)
+            {
+                if (!isDrifting)
+                {
+                    skidAudio.Play();
+
+                    foreach (ParticleSystem particles in GetComponentsInChildren<ParticleSystem>())
+                    {
+                        particles.Play();
+                    }
+
+                    isDrifting = true;
+                }
+            }
+            else
+            {
+                if (isDrifting)
+                {
+                    skidAudio.Stop();
+
+                    foreach (ParticleSystem particles in GetComponentsInChildren<ParticleSystem>())
+                    {
+                        particles.Stop();
+                    }
+
+                    isDrifting = false;
+                }
+            }
+        }
     }
 
     public void DeliverPower(float torque)

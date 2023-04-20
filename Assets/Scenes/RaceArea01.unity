@@ -392,7 +392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2822260357820612551, guid: 58019858d74046d4a924dd833baae0db, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.64
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2822260357820612551, guid: 58019858d74046d4a924dd833baae0db, type: 3}
       propertyPath: m_LocalPosition.z
@@ -434,6 +434,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2831707907845953006, guid: 58019858d74046d4a924dd833baae0db, type: 3}
+      propertyPath: m_SidewaysFriction.m_Stiffness
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2832026222351152236, guid: 58019858d74046d4a924dd833baae0db, type: 3}
       propertyPath: motorTorque
       value: 2500
@@ -453,6 +457,10 @@ PrefabInstance:
     - target: {fileID: 2832026222351152236, guid: 58019858d74046d4a924dd833baae0db, type: 3}
       propertyPath: maxMotorTorque
       value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832319566266948982, guid: 58019858d74046d4a924dd833baae0db, type: 3}
+      propertyPath: m_SidewaysFriction.m_Stiffness
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7987651040464765131, guid: 58019858d74046d4a924dd833baae0db, type: 3}
       propertyPath: driftSlipThreshold

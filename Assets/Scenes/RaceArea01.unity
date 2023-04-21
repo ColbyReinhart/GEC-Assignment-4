@@ -824,7 +824,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9344232d22bcedb40a2ba1c3fc82bf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lapTimer: {fileID: 0}
+  currentLapText: {fileID: 1295987228}
+  bestLapText: {fileID: 1309358706}
+  timerFormat: mm':'ss'.'f
 --- !u!1 &1103152158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,7 +1098,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Best:00:00.0
+  m_text: 'Best: 00:00.0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bffef1dad85792148867a3fd1ebbd979, type: 2}
   m_sharedMaterial: {fileID: 7387810601305511147, guid: bffef1dad85792148867a3fd1ebbd979, type: 2}

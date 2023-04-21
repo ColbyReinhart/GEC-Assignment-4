@@ -10,6 +10,7 @@ public class VehicleController : MonoBehaviour
     //
 
     public List<AxleController> axles;
+    public AudioSource crashSound;
 
     [Space(10)]
     public float baseEngineTorque;
@@ -19,6 +20,7 @@ public class VehicleController : MonoBehaviour
     [Space(10)]
     public float brakeTorque;
     public float handbrakeTorque;
+    public float crashVelocity;
 
     [Space(10)]
     public int gears;
@@ -38,6 +40,14 @@ public class VehicleController : MonoBehaviour
         // Get component references
         rb = GetComponent<Rigidbody>();
         engineAudio = GetComponent<AudioSource>();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.relativeVelocity.magnitude >= crashVelocity)
+        {
+            crashSound.Play();
+        }
     }
 
     private void FixedUpdate()

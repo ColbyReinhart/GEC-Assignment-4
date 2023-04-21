@@ -6,6 +6,7 @@ public class CourseController : MonoBehaviour
 {
     public UIController ui;
     public Checkpoint finishLine;
+    public VehicleController playerVehicle;
 
     public int laps = 3;
 
@@ -26,6 +27,17 @@ public class CourseController : MonoBehaviour
         {
             checkpoint.SetController(this);
         }
+
+        StartCoroutine(DoStartSequence());
+    }
+
+    public IEnumerator DoStartSequence()
+    {
+        // Wait a second for everything to initialize
+        yield return new WaitForSeconds(1);
+
+        // Start the UI countdown
+        StartCoroutine(ui.DoCountdown(playerVehicle));
     }
 
     public bool Notify(Checkpoint checkpoint)

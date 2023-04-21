@@ -36,10 +36,11 @@ public class VehicleController : MonoBehaviour
     private AudioSource engineAudio;
     private Transform spawnPoint;
 
-    public void SetSpawn(Transform spawnPoint)
-    {
-        this.spawnPoint = spawnPoint;
-    }
+    //
+    // Private members
+    //
+
+    private bool canDrive = false;
 
     private void Awake()
     {
@@ -47,6 +48,16 @@ public class VehicleController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         engineAudio = GetComponent<AudioSource>();
         spawnPoint = transform;
+    }
+
+    public void SetSpawn(Transform spawnPoint)
+    {
+        this.spawnPoint = spawnPoint;
+    }
+
+    public void DoDriving(bool value)
+    {
+        canDrive = value;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -75,6 +86,9 @@ public class VehicleController : MonoBehaviour
         float lowerPitch = currentGear > 0 ? engineLowPitch : engineIdlePitch;
         float pitchRange = engineHighPitch - lowerPitch;
         engineAudio.pitch = (maxGearSpeedRatio * pitchRange) + lowerPitch;
+
+        // Don't do anything past this if we can't drive
+        if (!canDrive) { return; }
 
         // Calculate input values
         float torqueInput = Input.GetAxis("Gas") * engineTorque;

@@ -34,12 +34,19 @@ public class VehicleController : MonoBehaviour
 
     private Rigidbody rb;
     private AudioSource engineAudio;
+    private Transform spawnPoint;
+
+    public void SetSpawn(Transform spawnPoint)
+    {
+        this.spawnPoint = spawnPoint;
+    }
 
     private void Awake()
     {
         // Get component references
         rb = GetComponent<Rigidbody>();
         engineAudio = GetComponent<AudioSource>();
+        spawnPoint = transform;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -50,7 +57,7 @@ public class VehicleController : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         // How close are we to max speed?
         float speedPercent = rb.velocity.magnitude / maxSpeed;
@@ -82,6 +89,15 @@ public class VehicleController : MonoBehaviour
             if (axle.hasSteering) { axle.Steer(steerInput); }
             axle.ApplyBrake(brakeInput);
             if (axle.hasHandbrake) { axle.ApplyHandbrake(handbrakeInput); }
+        }
+
+        // Reset the car if the user tells us to
+        if (Input.GetButtonDown("Respawn"))
+        {
+            transform.position = spawnPoint.position;
+            transform.rotation = spawnPoint.rotation;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         }
     }
 }

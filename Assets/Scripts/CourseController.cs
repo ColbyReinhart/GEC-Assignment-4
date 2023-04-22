@@ -7,6 +7,7 @@ public class CourseController : MonoBehaviour
     public UIController ui;
     public Checkpoint finishLine;
     public VehicleController playerVehicle;
+    public List<VehicleAI> cpus;
 
     public int laps = 3;
 
@@ -16,7 +17,7 @@ public class CourseController : MonoBehaviour
     private int currentLap = 0;
     private int currentCheckpoint = -1;
 
-    private void Start()
+    private void Awake()
     {
         // Get all checkpoints
         checkpoints = new List<Checkpoint>(GetComponentsInChildren<Checkpoint>(true));
@@ -37,7 +38,16 @@ public class CourseController : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         // Start the UI countdown
-        StartCoroutine(ui.DoCountdown(playerVehicle));
+        StartCoroutine(ui.DoCountdown(this));
+    }
+
+    public void EnableCars(bool enable)
+    {
+        playerVehicle.DoDriving(enable);
+        foreach (VehicleAI ai in cpus)
+        {
+            ai.DoDriving(enable);
+        }
     }
 
     public bool Notify(Checkpoint checkpoint)
@@ -68,6 +78,11 @@ public class CourseController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public List<Checkpoint> GetCheckpoints()
+    {
+        return checkpoints;
     }
 
     private void EndRace()

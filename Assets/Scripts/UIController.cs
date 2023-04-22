@@ -48,7 +48,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public IEnumerator DoCountdown(VehicleController player)
+    public IEnumerator DoCountdown(CourseController controller)
     {
         for (int i = 3; i > 0; i--)
         {
@@ -59,7 +59,7 @@ public class UIController : MonoBehaviour
 
         countDownText.text = "GO!";
         menuAudio.PlayOneShot(startBeep);
-        player.DoDriving(true);
+        controller.EnableCars(true);
         yield return new WaitForSeconds(1);
 
         countDownText.gameObject.SetActive(false);

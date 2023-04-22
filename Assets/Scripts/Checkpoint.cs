@@ -20,6 +20,7 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // Did a player pass the checkpoint?
         VehicleController player = other.GetComponent<VehicleController>();
         if (player != null)
         {
@@ -28,6 +29,8 @@ public class Checkpoint : MonoBehaviour
             {
                 player.SetSpawn(spawnPoint);
             }
+
+            return;
         }
     }
 }

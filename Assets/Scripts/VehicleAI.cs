@@ -11,8 +11,6 @@ public class VehicleAI : MonoBehaviour
     private NavMeshAgent nav;
     private List<Checkpoint> checkpoints;
 
-    private bool isRacing = false;
-
     private int targetCheckpointIndex = 0;
 
     private void Awake()
@@ -23,27 +21,17 @@ public class VehicleAI : MonoBehaviour
     private void Start()
     {
         checkpoints = controller.GetCheckpoints();
+        nav.SetDestination(checkpoints[targetCheckpointIndex].transform.position);
+        nav.isStopped = true;
     }
 
     public void DoDriving(bool value)
     {
-        isRacing = value;
-
-        if (value)
-        {
-            nav.SetDestination(checkpoints[targetCheckpointIndex].transform.position);
-            Debug.Log("Test!");
-        }
-        else
-        {
-            nav.ResetPath();
-        }
+        nav.isStopped = !value;
     }
 
     private void Update()
     {
-        if (!isRacing) { return; }
-
         Checkpoint targetCheckpoint = checkpoints[targetCheckpointIndex];
         float checkpointDistance =
             (targetCheckpoint.transform.position - transform.position).sqrMagnitude;

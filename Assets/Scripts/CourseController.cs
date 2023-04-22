@@ -29,15 +29,7 @@ public class CourseController : MonoBehaviour
             checkpoint.SetController(this);
         }
 
-        StartCoroutine(DoStartSequence());
-    }
-
-    public IEnumerator DoStartSequence()
-    {
-        // Wait a second for everything to initialize
-        yield return new WaitForSeconds(1);
-
-        // Start the UI countdown
+        // Tell the UI manager to start the countdown
         StartCoroutine(ui.DoCountdown(this));
     }
 
@@ -50,6 +42,8 @@ public class CourseController : MonoBehaviour
         }
     }
 
+    // Lets a checkpoint notify the controller when it's been passed through
+    // Returns a boolean denoting if the checkpoint "counted" or not
     public bool Notify(Checkpoint checkpoint)
     {
         int checkpointNumber = checkpoints.IndexOf(checkpoint);

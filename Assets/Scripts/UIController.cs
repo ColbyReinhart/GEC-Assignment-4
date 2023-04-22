@@ -50,6 +50,10 @@ public class UIController : MonoBehaviour
 
     public IEnumerator DoCountdown(CourseController controller)
     {
+        // Wait a second for everything to initialize
+        yield return new WaitForSeconds(1);
+
+        // Do the countdown
         for (int i = 3; i > 0; i--)
         {
             countDownText.text = i.ToString();
@@ -57,11 +61,13 @@ public class UIController : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
 
+        // Start the race!
         countDownText.text = "GO!";
         menuAudio.PlayOneShot(startBeep);
         controller.EnableCars(true);
         yield return new WaitForSeconds(1);
 
+        // Disable countdown text
         countDownText.gameObject.SetActive(false);
     }
 

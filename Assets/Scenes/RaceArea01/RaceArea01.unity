@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18029143, g: 0.22572419, b: 0.30693057, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -464,11 +464,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &693840182 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7149038616096891342, guid: 84744e6a55251544c9e69f1653c9c49a, type: 3}
-  m_PrefabInstance: {fileID: 1470984847189205684}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1922,10 +1917,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7149038616096891337, guid: 84744e6a55251544c9e69f1653c9c49a, type: 3}
-      propertyPath: brakeTorque
-      value: 3000
-      objectReference: {fileID: 0}
     - target: {fileID: 7149038616096891342, guid: 84744e6a55251544c9e69f1653c9c49a, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1937,28 +1928,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7149038616096891337, guid: 84744e6a55251544c9e69f1653c9c49a, type: 3}
   m_PrefabInstance: {fileID: 1470984847189205684}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693840182}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5685823070b6112459f51551361f6a0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!208 &8601734906075186052
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693840182}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 5, y: 0.83500004, z: 5}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 0
-  m_Center: {x: -0.73, y: 0.83500004, z: 1.7450001}
-  m_TimeToStationary: 0.5
 --- !u!4 &8764644650560157481
 Transform:
   m_ObjectHideFlags: 0
@@ -2430,7 +2405,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 6
   m_Speed: 45
-  m_Acceleration: 20
+  m_Acceleration: 25
   avoidancePriority: 50
   m_AngularSpeed: 9999
   m_StoppingDistance: 0
@@ -2440,7 +2415,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 1
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &8784094058549374655
 MonoBehaviour:
   m_ObjectHideFlags: 0

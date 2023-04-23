@@ -10874,7 +10874,7 @@ MonoBehaviour:
   baseEngineTorque: 5000
   maxSpeed: 80
   maxSteeringAngle: 40
-  brakeTorque: 1000
+  brakeTorque: 3000
   handbrakeTorque: 3000
   crashVelocity: 20
   gears: 5

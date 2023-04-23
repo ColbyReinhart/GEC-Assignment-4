@@ -8,14 +8,23 @@ public class VehicleAI : MonoBehaviour
     public CourseController controller;
     public float checkpointReachDistance = 100f;
 
-    private NavMeshAgent nav;
-    private List<Checkpoint> checkpoints;
+    public float gears;
+    public float engineIdlePitch;
+    public float engineLowPitch;
+    public float engineHighPitch;
 
+    private NavMeshAgent nav;
+    private AudioSource engineAudio;
+
+    private List<Checkpoint> checkpoints;
     private int targetCheckpointIndex = 0;
+    private float maxSpeed;
 
     private void Awake()
     {
         nav = GetComponent<NavMeshAgent>();
+        engineAudio = GetComponent<AudioSource>();
+        maxSpeed = nav.speed;
     }
 
     private void Start()
@@ -32,6 +41,19 @@ public class VehicleAI : MonoBehaviour
 
     private void Update()
     {
+        // Copy pasted code from VehicleController (running out of time)
+        // Get some information about the current speed/gear
+        float speedRangePerGear = (int)(maxSpeed + 5f) / gears;
+        int currentGear = (int)(nav.velocity.magnitude / speedRangePerGear); 
+        float currentGearSpeed = nav.velocity.magnitude % speedRangePerGear;
+        float maxGearSpeedRatio = currentGearSpeed / speedRangePerGear;
+
+        // Calculate the engine audio pitch
+        float lowerPitch = currentGear > 0 ? engineLowPitch : engineIdlePitch;
+        float pitchRange = engineHighPitch - lowerPitch;
+        engineAudio.pitch = (maxGearSpeedRatio * pitchRange) + lowerPitch;
+
+        // Handle pathfinding
         Checkpoint targetCheckpoint = checkpoints[targetCheckpointIndex];
         float checkpointDistance =
             (targetCheckpoint.transform.position - transform.position).sqrMagnitude;

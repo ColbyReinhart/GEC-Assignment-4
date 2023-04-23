@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 1470984847872959128}
   - component: {fileID: 1470984847872959135}
   - component: {fileID: 7745721106497361152}
+  - component: {fileID: 9115255915393538991}
   m_Layer: 0
   m_Name: CameraMount
   m_TagString: Untagged
@@ -283,6 +284,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a11f7553457eb844a68eb545594a57a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9115255915393538991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470984847872959132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7512ee424cabef241aa3bdf9a8112ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4567358927377360907

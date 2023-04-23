@@ -13,6 +13,7 @@ public class CourseController : MonoBehaviour
 
     // All checkpoints except the finish line should be children of this object
     private List<Checkpoint> checkpoints;
+    private AudioSource levelAudio;
 
     private int currentLap = 0;
     private int currentCheckpoint = -1;
@@ -29,17 +30,24 @@ public class CourseController : MonoBehaviour
             checkpoint.SetController(this);
         }
 
+        // Get component references
+        levelAudio = GetComponent<AudioSource>();
+
         // Tell the UI manager to start the countdown
         StartCoroutine(ui.DoCountdown(this));
     }
 
-    public void EnableCars(bool enable)
+    public void DoRace(bool enable)
     {
+        // Enable player and CPUs
         playerVehicle.DoDriving(enable);
         foreach (VehicleAI ai in cpus)
         {
             ai.DoDriving(enable);
         }
+
+        // Start level music
+        levelAudio.Play();
     }
 
     // Lets a checkpoint notify the controller when it's been passed through

@@ -64,7 +64,7 @@ public class UIController : MonoBehaviour
         // Start the race!
         countDownText.text = "GO!";
         menuAudio.PlayOneShot(startBeep);
-        controller.EnableCars(true);
+        controller.DoRace(true);
         yield return new WaitForSeconds(1);
 
         // Disable countdown text

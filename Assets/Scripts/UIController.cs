@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
@@ -25,6 +26,15 @@ public class UIController : MonoBehaviour
         menuAudio = GetComponent<AudioSource>();
     }
 
+    private void Start()
+    {
+        // Load the recorded best lap
+        string prefsName = SceneManager.GetActiveScene().name + "BestTime";
+        bestLapTime = PlayerPrefs.GetFloat(prefsName);
+        bestLapText.text =
+                "Best: " + TimeSpan.FromSeconds(bestLapTime).ToString(timerFormat);
+    }
+
     public void Lap()
     {
         // Start counting
@@ -42,9 +52,14 @@ public class UIController : MonoBehaviour
         // Was this the best lap?
         if (lapTime < bestLapTime || bestLapTime == 0f)
         {
+            // Set the new best lap time
             bestLapTime = lapTime;
             bestLapText.text =
                 "Best: " + TimeSpan.FromSeconds(lapTime).ToString(timerFormat);
+
+            // Save it in playerprefs
+            string prefsName = SceneManager.GetActiveScene().name + "BestTime";
+            PlayerPrefs.SetFloat(prefsName, bestLapTime);
         }
     }
 

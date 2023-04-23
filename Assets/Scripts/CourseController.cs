@@ -33,8 +33,11 @@ public class CourseController : MonoBehaviour
         // Get component references
         levelAudio = GetComponent<AudioSource>();
 
+        // Register with the UI Controller
+        ui.SetCourseController(this);
+
         // Tell the UI manager to start the countdown
-        StartCoroutine(ui.DoCountdown(this));
+        StartCoroutine(ui.DoCountdown());
     }
 
     public void DoRace(bool enable)

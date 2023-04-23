@@ -43,6 +43,8 @@ public class VehicleAI : MonoBehaviour
     {
         // Copy pasted code from VehicleController (running out of time)
         // Get some information about the current speed/gear
+        // AI tends to go slighly over max speed, so add a few to max speed
+        // so that the audio doesn't freak out.
         float speedRangePerGear = (int)(maxSpeed + 5f) / gears;
         int currentGear = (int)(nav.velocity.magnitude / speedRangePerGear); 
         float currentGearSpeed = nav.velocity.magnitude % speedRangePerGear;
@@ -60,10 +62,21 @@ public class VehicleAI : MonoBehaviour
 
         if (checkpointDistance < checkpointReachDistance)
         {
-            Debug.Log("Made it to " + targetCheckpoint.gameObject.name);
             targetCheckpointIndex = (targetCheckpointIndex + 1) % checkpoints.Count;
-            nav.SetDestination(checkpoints[targetCheckpointIndex].transform.position);
-            Debug.Log("Now going to " + checkpoints[targetCheckpointIndex].gameObject.name);
+            StartCoroutine(RouteToNextCheckpoint());
+        }
+    }
+
+    private IEnumerator RouteToNextCheckpoint()
+    {
+        Vector3 destination = checkpoints[targetCheckpointIndex].transform.position;
+        Vector3 currentVelocity = nav.velocity;
+        nav.SetDestination(destination);
+
+        while (nav.pathPending)
+        {
+            nav.velocity = currentVelocity;
+            yield return new WaitForEndOfFrame();
         }
     }
 }

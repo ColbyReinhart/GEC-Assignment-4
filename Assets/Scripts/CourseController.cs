@@ -16,7 +16,8 @@ public class CourseController : MonoBehaviour
     [NonSerialized]
     public List<Checkpoint> checkpoints;
     private AudioSource levelAudio;
-    private List<Vehicle> vehicles;
+    [NonSerialized]
+    public List<Vehicle> vehicles;
     private bool raceIsOver = false;
 
     private void Awake()

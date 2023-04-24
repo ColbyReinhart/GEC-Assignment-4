@@ -22,7 +22,6 @@ public class UIController : MonoBehaviour
     private bool raceStarted = false;
     private float currentLapStamp = 0f;
     private float bestLapTime = 0f;
-    private int currentLap = 0;
 
     private void Awake()
     {
@@ -43,11 +42,10 @@ public class UIController : MonoBehaviour
         this.controller = controller;
     }
 
-    public void Lap()
+    public void Lap(int newLapNum)
     {
         // Setup the lap counter
-        ++currentLap;
-        lapNumberText.text = currentLap.ToString() + " of " + controller.laps;
+        lapNumberText.text = newLapNum.ToString() + " of " + controller.laps;
 
         // Start counting
         if (!raceStarted)

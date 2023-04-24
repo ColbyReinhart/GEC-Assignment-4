@@ -70,7 +70,7 @@ public class CourseController : MonoBehaviour
             if (checkpointNumber == 0)
             {
                 ++currentLap;
-                ui.Lap();
+                ui.Lap(currentLap);
                 Debug.Log("Now on lap " + currentLap);
 
                 if (currentLap > laps)

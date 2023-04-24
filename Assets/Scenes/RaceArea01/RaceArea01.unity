@@ -1888,6 +1888,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ui: {fileID: 973878927}
   finishLine: {fileID: 333893558}
+  victoryAudio: {fileID: 8300000, guid: 61681fc5e574a2744ad9a8bd144abdf1, type: 3}
   laps: 0
 --- !u!82 &1755655424
 AudioSource:
@@ -2852,7 +2853,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8770331722682201333}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28ff3610877eed44f8e960ef444c473d, type: 3}
   m_Name: 

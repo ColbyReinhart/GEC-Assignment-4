@@ -9,6 +9,7 @@ public class CourseController : MonoBehaviour
 
     public UIController ui;
     public Checkpoint finishLine;
+    public AudioClip victoryAudio;
     public int laps = 3;
 
     // All checkpoints except the finish line should be children of this object
@@ -100,6 +101,10 @@ public class CourseController : MonoBehaviour
 
     private void EndRace(Vehicle vehicle)
     {
+        // Play the victory audio
+        levelAudio.Stop();
+        levelAudio.PlayOneShot(victoryAudio);
+
         // Stop the racers
         foreach (Vehicle racer in vehicles)
         {

@@ -17,7 +17,6 @@ public class UIController : MonoBehaviour
     public string timerFormat = "mm':'ss'.'f";
 
     private AudioSource menuAudio;
-    private CourseController controller;
 
     private bool raceStarted = false;
     private float currentLapStamp = 0f;
@@ -37,15 +36,11 @@ public class UIController : MonoBehaviour
                 "Best: " + TimeSpan.FromSeconds(bestLapTime).ToString(timerFormat);
     }
 
-    public void SetCourseController(CourseController controller)
-    {
-        this.controller = controller;
-    }
-
     public void Lap(int newLapNum)
     {
         // Setup the lap counter
-        lapNumberText.text = newLapNum.ToString() + " of " + controller.laps;
+        lapNumberText.text =
+            newLapNum.ToString() + " of " + CourseController.instance.laps;
 
         // Start counting
         if (!raceStarted)
@@ -89,7 +84,7 @@ public class UIController : MonoBehaviour
         // Start the race!
         countDownText.text = "GO!";
         menuAudio.PlayOneShot(startBeep);
-        controller.DoRace(true);
+        CourseController.instance.DoRace(true);
         yield return new WaitForSeconds(1);
 
         // Disable countdown text

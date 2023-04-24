@@ -11092,20 +11092,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5685823070b6112459f51551361f6a0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  axles:
-  - {fileID: 1470984847149388608}
-  - {fileID: 1470984847002030296}
-  crashSound: {fileID: 3552368788669501792}
-  baseEngineTorque: 5000
+  engineAudio: {fileID: 7149038616096891336}
+  crashAudio: {fileID: 3552368788669501792}
+  cameraMount: {fileID: 1470984847872959133}
   maxSpeed: 80
-  maxSteeringAngle: 40
-  brakeTorque: 3000
-  handbrakeTorque: 3000
-  crashVelocity: 20
   gears: 5
   engineIdlePitch: 0.3
   engineLowPitch: 1
   engineHighPitch: 1.5
+  crashVelocity: 20
+  axles:
+  - {fileID: 1470984847149388608}
+  - {fileID: 1470984847002030296}
+  baseEngineTorque: 5000
+  maxSteeringAngle: 40
+  brakeTorque: 3000
+  handbrakeTorque: 3000
 --- !u!64 &7149038616096891338
 MeshCollider:
   m_ObjectHideFlags: 0

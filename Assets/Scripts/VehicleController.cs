@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VehicleController : MonoBehaviour
+public class VehicleController : Vehicle
 {
 
     //
@@ -10,31 +10,10 @@ public class VehicleController : MonoBehaviour
     //
 
     public List<AxleController> axles;
-    public AudioSource crashSound;
-
-    [Space(10)]
     public float baseEngineTorque;
-    public float maxSpeed;
     public float maxSteeringAngle;
-
-    [Space(10)]
     public float brakeTorque;
     public float handbrakeTorque;
-    public float crashVelocity;
-
-    [Space(10)]
-    public int gears;
-    public float engineIdlePitch;
-    public float engineLowPitch;
-    public float engineHighPitch;
-
-    //
-    // Component references
-    //
-
-    private Rigidbody rb;
-    private AudioSource engineAudio;
-    private Transform spawnPoint;
 
     //
     // Private members
@@ -42,29 +21,20 @@ public class VehicleController : MonoBehaviour
 
     private bool canDrive = false;
 
-    private void Awake()
-    {
-        // Get component references
-        rb = GetComponent<Rigidbody>();
-        engineAudio = GetComponent<AudioSource>();
-        spawnPoint = transform;
-    }
+    //
+    // Methods
+    //
 
-    public void SetSpawn(Transform spawnPoint)
-    {
-        this.spawnPoint = spawnPoint;
-    }
-
-    public void DoDriving(bool value)
+    public override void DoDriving(bool value)
     {
         canDrive = value;
-    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.relativeVelocity.magnitude >= crashVelocity)
+        foreach (AxleController axle in axles)
         {
-            crashSound.Play();
+            axle.DeliverPower(0);
+            axle.ApplyBrake(brakeTorque);
+            axle.ApplyHandbrake(handbrakeTorque);
+            axle.Steer(0);
         }
     }
 
@@ -76,16 +46,8 @@ public class VehicleController : MonoBehaviour
         // Decrease engine torque as we approach max speed
         float engineTorque = baseEngineTorque - (speedPercent * baseEngineTorque);
 
-        // Get some information about the current speed/gear
-        float speedRangePerGear = (int)maxSpeed / gears;
-        int currentGear = (int)(rb.velocity.magnitude / speedRangePerGear); 
-        float currentGearSpeed = rb.velocity.magnitude % speedRangePerGear;
-        float maxGearSpeedRatio = currentGearSpeed / speedRangePerGear;
-
-        // Calculate the engine audio pitch
-        float lowerPitch = currentGear > 0 ? engineLowPitch : engineIdlePitch;
-        float pitchRange = engineHighPitch - lowerPitch;
-        engineAudio.pitch = (maxGearSpeedRatio * pitchRange) + lowerPitch;
+        // Calculate the pitch of the engine noise
+        DoEngineNoise();
 
         // Don't do anything past this if we can't drive
         if (!canDrive) { return; }
@@ -108,10 +70,7 @@ public class VehicleController : MonoBehaviour
         // Reset the car if the user tells us to
         if (Input.GetButtonDown("Respawn"))
         {
-            transform.position = spawnPoint.position;
-            transform.rotation = spawnPoint.rotation;
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            Respawn();
         }
     }
 }

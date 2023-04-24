@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,13 +6,7 @@ using UnityEngine;
 // Controls checkpoints throughout the course
 public class Checkpoint : MonoBehaviour
 {
-    private CourseController controller = null;
     private Transform spawnPoint;
-
-    public void SetController(CourseController controller)
-    {
-        this.controller = controller;
-    }
 
     private void Awake()
     {
@@ -21,16 +16,14 @@ public class Checkpoint : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Did a player pass the checkpoint?
-        VehicleController player = other.GetComponent<VehicleController>();
-        if (player != null)
+        Vehicle vehicle = other.GetComponent<Vehicle>();
+        if (vehicle != null)
         {
-            bool counted = controller.Notify(this);
-            if (counted)
+            bool setSpawn = CourseController.instance.Notify(this, vehicle);
+            if (setSpawn)
             {
-                player.SetSpawn(spawnPoint);
+                vehicle.SetSpawn(spawnPoint);
             }
-
-            return;
         }
     }
 }

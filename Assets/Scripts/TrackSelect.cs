@@ -13,6 +13,6 @@ public class TrackSelect : MonoBehaviour
     public void SelectTrack(string scenePath)
     {
         PlayerPrefs.SetString("SelectedTrack", scenePath);
-        MainMenu();
+        SceneManager.LoadScene("Scenes/CarSelect");
     }
 }

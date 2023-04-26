@@ -12,6 +12,11 @@ public class CourseController : MonoBehaviour
     public AudioClip victoryAudio;
     public int laps = 3;
 
+    [Space(10)]
+
+    public Transform playerSpawn;
+    public List<GameObject> playerPrefabs = new List<GameObject>();
+
     // All checkpoints except the finish line should be children of this object
     [NonSerialized]
     public List<Checkpoint> checkpoints;
@@ -28,6 +33,16 @@ public class CourseController : MonoBehaviour
             Destroy(instance);
         }
         instance = this;
+
+        // Spawn the player car
+        string prefabToUse = PlayerPrefs.GetString("SelectedCar");
+        foreach (GameObject car in playerPrefabs)
+        {
+            if (car.name == prefabToUse)
+            {
+                Instantiate(car, playerSpawn.position, playerSpawn.rotation);
+            }
+        }
 
         // Get all checkpoints
         checkpoints = new List<Checkpoint>(GetComponentsInChildren<Checkpoint>(true));

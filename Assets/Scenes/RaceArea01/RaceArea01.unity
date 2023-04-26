@@ -106,7 +106,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 1
+    agentRadius: 3
     agentHeight: 2
     agentSlope: 0
     agentClimb: 0.4
@@ -114,7 +114,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.33333334
+    cellSize: 1
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 2c41e0809d9c7404e87f329294e229e6, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 1c8370c1675d4a044858fa6382b4036c, type: 2}
 --- !u!114 &333893558 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1120031692227197274, guid: bb809e53715628a4a83a05e56e6abddf, type: 3}
@@ -629,7 +629,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9754e08cbb1546349a9e58540a062ca9, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0

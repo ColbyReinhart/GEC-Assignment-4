@@ -54,6 +54,9 @@ public class ScoreAttackUI : UIController
             token.gameObject.SetActive(true);
         }
 
+        // Reset lap score
+        currentLapScore = 0;
+
         // Was this the best score?
         if (bestLapScore < currentLapScore)
         {

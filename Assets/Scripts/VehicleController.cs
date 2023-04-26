@@ -19,7 +19,7 @@ public class VehicleController : Vehicle
     // Private members
     //
 
-    private bool canDrive = true;
+    private bool canDrive = false;
 
     //
     // Methods

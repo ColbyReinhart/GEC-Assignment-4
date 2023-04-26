@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 296121782}
   - component: {fileID: 296121781}
   m_Layer: 5
-  m_Name: IslandRush
+  m_Name: ScoreAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,14 +209,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1012642136}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: SelectTrack
+        m_MethodName: SelectMode
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Scenes/RaceArea02/RaceArea02
+          m_StringArgument: ScoreAttack
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1012642136}
@@ -228,7 +228,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Scenes/CarSelect
+          m_StringArgument: Scenes/TrackSelect
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &296121782
@@ -362,7 +362,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Scenes/ModeSelect
+          m_StringArgument: Scenes/MainMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &314223357
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 986220730}
   - component: {fileID: 986220729}
   m_Layer: 5
-  m_Name: TrackSelect
+  m_Name: ModeSelect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -596,7 +596,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Track Selection
+  m_text: Mode Selection
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -848,7 +848,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Island Rush
+  m_text: Score Attack
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -938,7 +938,7 @@ GameObject:
   - component: {fileID: 1116703277}
   - component: {fileID: 1116703276}
   m_Layer: 5
-  m_Name: MountainPass
+  m_Name: GrandPrix
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1011,14 +1011,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1012642136}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: SelectTrack
+        m_MethodName: SelectMode
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Scenes/RaceArea01/RaceArea01
+          m_StringArgument: GrandPrix
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1012642136}
@@ -1030,7 +1030,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Scenes/CarSelect
+          m_StringArgument: Scenes/TrackSelect
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1116703277
@@ -1197,7 +1197,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Mountain Pass
+  m_text: Grand Prix
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -208,7 +208,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1012642136}
-        m_TargetAssemblyTypeName: CarSelect, Assembly-CSharp
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
         m_MethodName: SelectCar
         m_Mode: 5
         m_Arguments:
@@ -217,6 +217,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: PlayerCar2
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1012642136}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: StartRace
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &296121782
@@ -342,15 +354,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1012642136}
-        m_TargetAssemblyTypeName: CarSelect, Assembly-CSharp
-        m_MethodName: Back
-        m_Mode: 1
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Scenes/TrackSelect
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &314223357
@@ -777,7 +789,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1012642131}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aa9c71018e403c44bd21102ae194ec0, type: 3}
+  m_Script: {fileID: 11500000, guid: 214ac0c177dcab5439fa6a8bfeb5451b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1034348226
@@ -1000,7 +1012,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1012642136}
-        m_TargetAssemblyTypeName: CarSelect, Assembly-CSharp
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
         m_MethodName: SelectCar
         m_Mode: 5
         m_Arguments:
@@ -1009,6 +1021,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: PlayerCar1
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1012642136}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: StartRace
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1116703277

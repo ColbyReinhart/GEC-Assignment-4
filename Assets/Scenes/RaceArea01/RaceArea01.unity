@@ -2378,7 +2378,7 @@ MonoBehaviour:
   - {fileID: 7149038616096891342, guid: 84744e6a55251544c9e69f1653c9c49a, type: 3}
   - {fileID: 6409512859799126577, guid: 73199170572bc8046aabd40eeeb9bb10, type: 3}
   - {fileID: 1791655016410074129, guid: 0cc78eba153c03442bbacb3d3b2c3bcf, type: 3}
-  laps: 1
+  laps: 2
   victoryAudio: {fileID: 8300000, guid: 61681fc5e574a2744ad9a8bd144abdf1, type: 3}
   scoreAttackRoot: {fileID: 457497039}
 --- !u!82 &1755655424

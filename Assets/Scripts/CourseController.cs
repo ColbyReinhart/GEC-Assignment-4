@@ -7,22 +7,29 @@ public class CourseController : MonoBehaviour
 {
     public static CourseController instance;
 
-    public UIController ui;
+    [Header("UI Instances")]
+    public UIController raceUI;
+    public UIController scoreAttackUI;
+
+    [Header("Track Info")]
     public Checkpoint finishLine;
-    public AudioClip victoryAudio;
-    public int laps = 3;
-
-    [Space(10)]
-
+    public List<Checkpoint> checkpoints;
+    public List<GameObject> opponents;
     public Transform playerSpawn;
     public List<GameObject> playerPrefabs = new List<GameObject>();
+    public int laps = 3;
 
-    // All checkpoints except the finish line should be children of this object
+    [Header("Audio Control")]
+    public AudioClip victoryAudio;
+
+    [Header("Misc")]
+    public GameObject scoreAttackRoot;
+
     [NonSerialized]
-    public List<Checkpoint> checkpoints;
     private AudioSource levelAudio;
     [NonSerialized]
     public List<Vehicle> vehicles;
+    private UIController ui;
     private bool raceIsOver = false;
 
     private void Awake()
@@ -33,6 +40,27 @@ public class CourseController : MonoBehaviour
             Destroy(instance);
         }
         instance = this;
+
+        // Enable mode objects as necessary
+        string mode = PlayerPrefs.GetString("SelectedMode", "GrandPrix");
+        if (mode == "ScoreAttack")
+        {
+            ui = scoreAttackUI;
+            scoreAttackRoot.SetActive(true);
+        }
+        else
+        {
+            ui = raceUI;
+
+            if (mode == "GrandPrix")
+            {
+                foreach (GameObject opponent in opponents)
+                {
+                    opponent.SetActive(true);
+                }
+            }
+        }
+        ui.gameObject.SetActive(true);
 
         // Spawn the player car
         string prefabToUse = PlayerPrefs.GetString("SelectedCar");

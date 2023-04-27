@@ -11,37 +11,21 @@ public class UIController : MonoBehaviour
     public Image minimap;
     public GameObject marker;
 
-    [Space(10)]
-
-    public TMP_Text currentLapText;
-    public TMP_Text bestLapText;
-    public TMP_Text lapNumberText;
     public TMP_Text countDownText;
     public AudioClip getReadyBeep;
     public AudioClip startBeep;
 
-    public string timerFormat = "mm':'ss'.'f";
+    protected AudioSource menuAudio;
+    protected Dictionary<Vehicle, GameObject> minimapMarkers;
+    protected bool raceStarted = false;
 
-    private AudioSource menuAudio;
-
-    private Dictionary<Vehicle, GameObject> minimapMarkers;
-    private bool raceStarted = false;
-    private float currentLapStamp = 0f;
-    private float bestLapTime = 0f;
-
-    private void Awake()
+    protected void Awake()
     {
         menuAudio = GetComponent<AudioSource>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
-        // Load the recorded best lap
-        string prefsName = SceneManager.GetActiveScene().name + "BestTime";
-        bestLapTime = PlayerPrefs.GetFloat(prefsName);
-        bestLapText.text =
-                "Best: " + TimeSpan.FromSeconds(bestLapTime).ToString(timerFormat);
-
         // Setup minimap markers
         minimapMarkers = new Dictionary<Vehicle, GameObject>();
         foreach (Vehicle vehicle in CourseController.instance.vehicles)
@@ -53,37 +37,8 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void Lap(int newLapNum)
-    {
-        // Setup the lap counter
-        lapNumberText.text =
-            newLapNum.ToString() + " of " + CourseController.instance.laps;
-
-        // Start counting
-        if (!raceStarted)
-        {
-            raceStarted = true;
-            currentLapStamp = Time.time;
-            return;
-        }
-
-        // Calculate lap time
-        float lapTime = Time.time - currentLapStamp;
-        currentLapStamp = Time.time;
-
-        // Was this the best lap?
-        if (lapTime < bestLapTime || bestLapTime == 0f)
-        {
-            // Set the new best lap time
-            bestLapTime = lapTime;
-            bestLapText.text =
-                "Best: " + TimeSpan.FromSeconds(lapTime).ToString(timerFormat);
-
-            // Save it in playerprefs
-            string prefsName = SceneManager.GetActiveScene().name + "BestTime";
-            PlayerPrefs.SetFloat(prefsName, bestLapTime);
-        }
-    }
+    // What happens on the next lap?
+    public virtual void Lap(int newLapNum) { }
 
     public IEnumerator DoCountdown()
     {
@@ -108,18 +63,7 @@ public class UIController : MonoBehaviour
         countDownText.gameObject.SetActive(false);
     }
 
-    private void Update()
-    {
-        HandleMinimap();
-
-        if (!raceStarted) { return; }
-
-        float timeSinceLapStart = Time.time - currentLapStamp;
-        currentLapText.text =
-            "Lap: " + TimeSpan.FromSeconds(timeSinceLapStart).ToString(timerFormat);
-    }
-
-    private void HandleMinimap()
+    protected void HandleMinimap()
     {
         // Get terrain dimensions
         Vector3 terrainPos = Terrain.activeTerrain.GetPosition();

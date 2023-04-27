@@ -640,10 +640,10 @@ GameObject:
   - component: {fileID: 3126653585371370717}
   - component: {fileID: 3126653585371370716}
   - component: {fileID: 3126653585371370715}
-  - component: {fileID: 3126653585371370719}
   - component: {fileID: 3126653585371370688}
+  - component: {fileID: 5686730643248172895}
   m_Layer: 5
-  m_Name: UI
+  m_Name: RaceUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -734,27 +734,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &3126653585371370719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3126653585371370714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9344232d22bcedb40a2ba1c3fc82bf76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minimap: {fileID: 3126653585349037357}
-  marker: {fileID: 5670281241505604327, guid: 7435fa778a923344eb1a54bf38ef5b13, type: 3}
-  currentLapText: {fileID: 3126653585122660428}
-  bestLapText: {fileID: 3126653585170110498}
-  lapNumberText: {fileID: 3126653585025188709}
-  countDownText: {fileID: 3126653585986441640}
-  getReadyBeep: {fileID: 8300000, guid: 6b383c5718aaa8e4f8e587b72808c862, type: 3}
-  startBeep: {fileID: 8300000, guid: ead686d7e90711b45a1c5d125affc197, type: 3}
-  timerFormat: mm':'ss'.'f
 --- !u!82 &3126653585371370688
 AudioSource:
   m_ObjectHideFlags: 0
@@ -851,6 +830,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5686730643248172895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3126653585371370714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f29fb02018a01634ab83a00b28ed0f71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minimap: {fileID: 3126653585349037357}
+  marker: {fileID: 5670281241505604327, guid: 7435fa778a923344eb1a54bf38ef5b13, type: 3}
+  countDownText: {fileID: 3126653585986441640}
+  getReadyBeep: {fileID: 8300000, guid: 6b383c5718aaa8e4f8e587b72808c862, type: 3}
+  startBeep: {fileID: 8300000, guid: ead686d7e90711b45a1c5d125affc197, type: 3}
+  currentLapText: {fileID: 3126653585122660428}
+  bestLapText: {fileID: 3126653585170110498}
+  lapNumberText: {fileID: 3126653585025188709}
+  timerFormat: mm':'ss'.'f
 --- !u!1 &3126653585986441638
 GameObject:
   m_ObjectHideFlags: 0

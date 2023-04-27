@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
     public GameObject marker;
 
     public TMP_Text countDownText;
+    public GameObject mainMenuButton;
     public AudioClip getReadyBeep;
     public AudioClip startBeep;
 
@@ -39,6 +40,13 @@ public class UIController : MonoBehaviour
 
     // What happens on the next lap?
     public virtual void Lap(int newLapNum) { }
+
+    public virtual void DoFinishUI(bool playerWon)
+    {
+        mainMenuButton.SetActive(true);
+        countDownText.gameObject.SetActive(true);
+        countDownText.text = playerWon ? "You win! +$100" : "You lost!";
+    }
 
     public IEnumerator DoCountdown()
     {

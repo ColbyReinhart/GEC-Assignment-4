@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum RaceMode { GrandPrix, TimeAttack, ScoreAttack }
+
 public class CourseController : MonoBehaviour
 {
     public static CourseController instance;
@@ -30,6 +32,7 @@ public class CourseController : MonoBehaviour
     [NonSerialized]
     public List<Vehicle> vehicles;
     private UIController ui;
+    private RaceMode raceMode;
     private bool raceIsOver = false;
 
     private void Awake()
@@ -45,6 +48,7 @@ public class CourseController : MonoBehaviour
         string mode = PlayerPrefs.GetString("SelectedMode", "GrandPrix");
         if (mode == "ScoreAttack")
         {
+            raceMode = RaceMode.ScoreAttack;
             ui = scoreAttackUI;
             scoreAttackRoot.SetActive(true);
         }
@@ -54,12 +58,19 @@ public class CourseController : MonoBehaviour
 
             if (mode == "GrandPrix")
             {
+                raceMode = RaceMode.GrandPrix;
+
                 foreach (GameObject opponent in opponents)
                 {
                     opponent.SetActive(true);
                 }
             }
+            else
+            {
+                raceMode = RaceMode.TimeAttack;
+            }
         }
+
         ui.gameObject.SetActive(true);
 
         // Spawn the player car
@@ -177,5 +188,18 @@ public class CourseController : MonoBehaviour
 
         // Do the victory cutscene on the winning car
         StartCoroutine(vehicle.DoVictoryCutscene());
+
+        // Do race end UI
+        bool playerWon = raceMode == RaceMode.ScoreAttack ||
+            raceMode == RaceMode.TimeAttack ||
+            (raceMode == RaceMode.GrandPrix && vehicle.CompareTag("Player"));
+        ui.DoFinishUI(playerWon);
+
+        // Add cash to player prefs if the player won
+        if (playerWon)
+        {
+            int cash = PlayerPrefs.GetInt("Cash");
+            PlayerPrefs.SetInt("Cash", cash + 100);
+        }
     }
 }

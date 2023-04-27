@@ -31,8 +31,9 @@ public class CourseController : MonoBehaviour
     private AudioSource levelAudio;
     [NonSerialized]
     public List<Vehicle> vehicles;
+    [NonSerialized]
+    public RaceMode raceMode;
     private UIController ui;
-    private RaceMode raceMode;
     private bool raceIsOver = false;
 
     private void Awake()
@@ -59,6 +60,7 @@ public class CourseController : MonoBehaviour
             if (mode == "GrandPrix")
             {
                 raceMode = RaceMode.GrandPrix;
+                ui.positionText.gameObject.SetActive(true);
 
                 foreach (GameObject opponent in opponents)
                 {

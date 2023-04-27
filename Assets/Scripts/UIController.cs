@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
     public GameObject marker;
 
     public TMP_Text countDownText;
+    public TMP_Text positionText;
     public GameObject mainMenuButton;
     public AudioClip getReadyBeep;
     public AudioClip startBeep;
@@ -40,6 +41,11 @@ public class UIController : MonoBehaviour
 
     // What happens on the next lap?
     public virtual void Lap(int newLapNum) { }
+
+    public void UpdatePosition(bool overtaken)
+    {
+        positionText.text = overtaken ? "1st place" : "2nd place";
+    }
 
     public virtual void DoFinishUI(bool playerWon)
     {

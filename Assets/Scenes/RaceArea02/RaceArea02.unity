@@ -1397,6 +1397,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3126653585349037357, guid: 9e107a203cfb4bd4191e15afe7e042bd, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 62937f55ddd23934dac955e2a279c3dc, type: 3}
     - target: {fileID: 3126653585371370714, guid: 9e107a203cfb4bd4191e15afe7e042bd, type: 3}
       propertyPath: m_Name
       value: RaceUI
@@ -2332,6 +2336,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 293126162206654389, guid: 4d7afa1fec75631458d7b6f6e408200d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 62937f55ddd23934dac955e2a279c3dc, type: 3}
     - target: {fileID: 293126162213643842, guid: 4d7afa1fec75631458d7b6f6e408200d, type: 3}
       propertyPath: m_Name
       value: ScoreAttackUI

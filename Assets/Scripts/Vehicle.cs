@@ -57,9 +57,9 @@ public abstract class Vehicle : MonoBehaviour
 
     public IEnumerator DoVictoryCutscene()
     {
-        Camera.main.transform.parent = cameraMount;
-        Camera.main.transform.localPosition = new Vector3(0, 5, 10);
-        Camera.main.transform.localEulerAngles = new Vector3(30, 180, 0);
+        Camera.current.transform.parent = cameraMount;
+        Camera.current.transform.localPosition = new Vector3(0, 5, 10);
+        Camera.current.transform.localEulerAngles = new Vector3(30, 180, 0);
         Vector3 victoryRotation = new Vector3(0, 45, 0);
 
         while (true)
